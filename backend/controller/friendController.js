@@ -4,7 +4,7 @@ const User = require("../model/userModel");
 
 const sendFriendRequest = async (req, res) => {
   const { to } = req.body;
-  const from = req.user._id;
+  const from = req.user.id;
 
   try {
     // Check if a request already exists
@@ -24,7 +24,7 @@ const sendFriendRequest = async (req, res) => {
 };
 
 const getFriendRequests = async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.user.id;
 
   try {
     const requests = await FriendRequest.find({ to: userId, status: "pending" })

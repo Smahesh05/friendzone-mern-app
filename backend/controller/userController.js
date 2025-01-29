@@ -83,7 +83,7 @@ const generateToken = (id) => {
 
 const searchUsers = async (req, res) => {
   const { query } = req.query;
-  const currentUserId = req.user._id; // Assuming you have middleware to attach the user to the request
+  const currentUserId = req.user.id; // Assuming you have middleware to attach the user to the request
 
   try {
     const users = await User.find({

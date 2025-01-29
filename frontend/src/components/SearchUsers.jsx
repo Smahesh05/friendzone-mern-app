@@ -30,6 +30,7 @@ const SearchUsers = () => {
       <h2>Search Users</h2>
       <input
         type="text"
+        className="form-control"
         placeholder="Search by name or email"
         value={query}
         onChange={(e) => setQuery(e.target.value)}

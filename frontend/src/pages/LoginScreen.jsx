@@ -1,6 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { LoginUser } from "../services/api";
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -13,11 +13,23 @@ const LoginScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await LoginUser(formData);
 
+    const options = {
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/users/login",
+        formData,
+        options
+      );
+
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
       navigate("/profile");
     } catch (err) {
+      console.log(err);
       setError(err.response?.data?.message || "Something went wrong");
     }
   };
